@@ -1,8 +1,8 @@
-"""Write a Python program to store first year percentage of students in array. Write
+#Write a Python program to store first year percentage of students in array. Write
 #function for sorting array of floating point numbers in ascending order using quick sort
-#and display top five scores"""
+#and display top five scores
 
-
+#Function for accepting the percentage of the Students
 def inperc():
     perc = []
     n = int(input("Enter the number of students: "))
@@ -10,11 +10,13 @@ def inperc():
         perc.append(float(input("Enter the percentage of student {0}: ".format(i + 1))))
     return perc
 
+# Function for performing partition of the Data
 def outperc(perc):
     for i in range(len(perc)):
-        print(perc[i])  # Removed unnecessary 'sep' as it's irrelevant here
+        print(perc[i]) 
 
-def perpartition(perc, start, end):
+# Function for printing the percentage of the Students
+def perc_partition(perc, start, end):
     pivot = perc[start]
     lower_bound = start + 1
     upper_bound = end
@@ -24,17 +26,18 @@ def perpartition(perc, start, end):
         while lower_bound <= upper_bound and perc[upper_bound] >= pivot:
             upper_bound -= 1
         if lower_bound <= upper_bound:
-            perc[lower_bound], perc[upper_bound] = perc[upper_bound], perc[lower_bound]
+            perc[lower_bound], perc[upper_bound] = perc[upper_bound], perc[lower_bound] #swap lower and upper bound
         else:
             break
-    perc[start], perc[upper_bound] = perc[upper_bound], perc[start]
+    perc[start], perc[upper_bound] = perc[upper_bound], perc[start] #swap pivot and upper bound
     return upper_bound
 
+# Function for performing Quick Sort on the Data
 def quicksort(perc, start, end):
     if start < end:
-        partition = perpartition(perc, start, end)
-        quicksort(perc, start, partition - 1)
-        quicksort(perc, partition + 1, end)
+        partition = perc_partition(perc, start, end)  #Find the pivot's correct position and rearrange the list around it.
+        quicksort(perc, start, partition - 1)  #Sort the left side of the pivot (elements smaller than the pivot)
+        quicksort(perc, partition + 1, end)  #Sort the right side of the pivot (elements larger than the pivot).
     return perc
 
 # Main menu logic
