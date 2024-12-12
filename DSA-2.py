@@ -45,7 +45,7 @@ def palindrome():
 def wordcount():
     my_string=input("Enter your string: ")
     print(my_string)
-    occur=dict()
+    occur={}
     sen=my_string.split()
     for i in sen:
         if i in occur:
