@@ -13,7 +13,7 @@ def inperc():
 # Function for performing partition of the Data
 def outperc(perc):
     for i in range(len(perc)):
-        print(perc[i]) 
+        print(perc[i])
 
 # Function for printing the percentage of the Students
 def perc_partition(perc, start, end):
@@ -26,19 +26,30 @@ def perc_partition(perc, start, end):
         while lower_bound <= upper_bound and perc[upper_bound] >= pivot:
             upper_bound -= 1
         if lower_bound <= upper_bound:
-            perc[lower_bound], perc[upper_bound] = perc[upper_bound], perc[lower_bound] #swap lower and upper bound
+            perc[lower_bound], perc[upper_bound] = perc[upper_bound], perc[lower_bound]  # swap lower and upper bound
         else:
             break
-    perc[start], perc[upper_bound] = perc[upper_bound], perc[start] #swap pivot and upper bound
+    perc[start], perc[upper_bound] = perc[upper_bound], perc[start]  # swap pivot and upper bound
     return upper_bound
 
 # Function for performing Quick Sort on the Data
 def quicksort(perc, start, end):
     if start < end:
-        partition = perc_partition(perc, start, end)  #Find the pivot's correct position and rearrange the list around it.
-        quicksort(perc, start, partition - 1)  #Sort the left side of the pivot (elements smaller than the pivot)
-        quicksort(perc, partition + 1, end)  #Sort the right side of the pivot (elements larger than the pivot).
+        partition = perc_partition(perc, start, end)  # Find the pivot's correct position and rearrange the list around it.
+        quicksort(perc, start, partition - 1)  # Sort the left side of the pivot (elements smaller than the pivot)
+        quicksort(perc, partition + 1, end)  # Sort the right side of the pivot (elements larger than the pivot).
     return perc
+
+# Function to display top five percentages
+def display_top_five(perc):
+    print("Top Five Percentages are:")
+    if len(perc) < 5:
+        start, stop = len(perc) - 1, -1
+    else:
+        start, stop = len(perc) - 1, len(perc) - 6
+
+    for i in range(start, stop, -1):
+        print(perc[i], sep="\n")
 
 # Main menu logic
 op = 1
@@ -50,6 +61,7 @@ while op == 1:
     print("1. Accept the percentage of students")
     print("2. Display the percentage of students")
     print("3. Perform quick sort on the data")
+    print("4. Display top five percentages")
     print("Enter your choice: ")
     ch = int(input())
     if ch == 1:
@@ -64,6 +76,11 @@ while op == 1:
             outperc(sortedperc)
         else:
             print("No data to sort! Please enter percentages first.")
+    elif ch == 4:
+        if sortedperc:
+            display_top_five(sortedperc)
+        else:
+            print("No sorted data available. Please perform quick sort first.")
     else:
         print("WRONG CHOICE!!!!")
 
