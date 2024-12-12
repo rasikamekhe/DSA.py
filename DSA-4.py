@@ -3,32 +3,53 @@
 #of club or not. Ternary search is modified binary search that divides array into 3 halves instead of two.
 
 import array as arr
-num = arr.array('i',[])
-n=int(input("Enter the no. of elements in array: "))
-flag =0
+
+# Initialize an empty array
+num = arr.array('i', [])
+n = int(input("Enter the number of elements in the array: "))
+
+# Input elements
 for i in range(n):
- elem=int(input("Enter the element: "))
- num.append(elem)
-print("The array is: ",num)
+    elem = int(input("Enter the element: "))
+    num.append(elem)
+
+print("The array is:", num)
+
+# Input the key to search for
 key = int(input("Enter the element you want to find: "))
-tsnum=sorted(num)
-print("The array after sorting is: ",tsnum)
-low =0
-high=n-1
-for i in range(n):
- mid1=low+(high-low)//3
- mid2=high-(high-low)//3
- if key==tsnum or key==tsnum[mid2]:
- print("Element found!!")
- flag=1
- break
- else:
- if key<tsnum[mid1]:
- high=mid1-1
- elif key>tsnum[mid1] and key<tsnum[mid2]:
- low=mid1=1
- high=mid2-1
- elif key>tsnum[mid2]:
- low=mid2+1
-if(flag==0):
- print("Element not found!!!")
+
+# Sort the array
+tsnum = sorted(num)
+print("The array after sorting is:", tsnum)
+
+# Ternary Search
+low = 0
+high = n - 1
+flag = 0  # To track if the element is found
+
+while low <= high:
+    mid1 = low + (high - low) // 3
+    mid2 = high - (high - low) // 3
+
+    # Check if the key is at either mid1 or mid2
+    if key == tsnum[mid1]:
+        print("Element found at index", mid1, "!!")
+        flag = 1
+        break
+    elif key == tsnum[mid2]:
+        print("Element found at index", mid2, "!!")
+        flag = 1
+        break
+    else:
+        # Narrow the search range
+        if key < tsnum[mid1]:
+            high = mid1 - 1  # Search in the first third
+        elif key > tsnum[mid1] and key < tsnum[mid2]:
+            low = mid1 + 1  # Search in the second third
+            high = mid2 - 1
+        elif key > tsnum[mid2]:
+            low = mid2 + 1  # Search in the third third
+
+# If the element is not found
+if flag == 0:
+    print("Element not found!!!")
