@@ -43,13 +43,9 @@ def quicksort(perc, start, end):
 # Function to display top five percentages
 def display_top_five(perc):
     print("Top Five Percentages are:")
-    if len(perc) < 5:
-        start, stop = len(perc) - 1, -1
-    else:
-        start, stop = len(perc) - 1, len(perc) - 6
-
-    for i in range(start, stop, -1):
-        print(perc[i], sep="\n")
+    # Limit the range to min(5, len(perc)) to avoid index errors for lists with fewer than 5 elements
+    for i in range(min(5, len(perc))):
+        print(perc[-(i + 1)])  # Access elements from the end of the sorted list
 
 # Main menu logic
 op = 1
